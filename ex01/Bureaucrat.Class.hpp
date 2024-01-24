@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.Class.hpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 11:29:48 by babels            #+#    #+#             */
-/*   Updated: 2024/01/21 12:19:52 by babels           ###   ########.fr       */
+/*   Updated: 2024/01/24 12:01:15 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include <iostream>
 #include <exception>
 #include <string>
+#include "Form.Class.hpp"
+
+class Form;
 
 class Bureaucrat
 {
@@ -42,6 +45,7 @@ class Bureaucrat
         int getGrade(void) const;
         void promote(void);
         void demote(void);
+        void signForm(Form &form);
     private:
         Bureaucrat(void);
         const std::string _name;

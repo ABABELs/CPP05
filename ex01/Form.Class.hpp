@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:33:44 by babels            #+#    #+#             */
-/*   Updated: 2024/01/23 14:24:42 by aabel            ###   ########.fr       */
+/*   Updated: 2024/01/24 12:00:48 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,37 @@
 # define FORM_CLASS_HPP
 
 # include <iostream>
-# include <stdexcept>
+# include <string>
+# include "Bureaucrat.Class.hpp"
 
-class Foarm
+class Bureaucrat;
+
+class Form
 {
     private:
+        Form();
         std::string const   _name;
         bool                _signed;
         int const           _gradeSign;
         int const           _gradeExec;
         
     public:
-        Foarm(std::string const name, int const gradeSign, int const gradeExec);
-        Foarm(Foarm const & src);
-        ~Foarm(void);
-        Foarm & operator=(Foarm const & rhs);
+        Form(std::string const name, int const gradeSign, int const gradeExec);
+        Form(Form const & src);
+        ~Form(void);
+        Form & operator=(Form const & rhs);
 
         std::string const   getName(void) const;
         bool                getSigned(void) const;
         int                 getGradeSign(void) const;
         int                 getGradeExec(void) const;
-
-        void                beSigned(Foarm const & b);
-        virtual void        execute(Foarm const & executor) const = 0;
+        void                beSigned(Bureaucrat &him);
 
         class GradeTooHighException : public std::exception
         {
             const char *_message;
             public:
-                GradeTooHighException(void);
+                GradeTooHighException(const char *message);
                 virtual const char* what() const throw()
                 {
                     return _message;
@@ -53,7 +55,7 @@ class Foarm
         {
             const char *_message;
             public:
-                GradeTooLowException(void);
+                GradeTooLowException(const char *message);
                 virtual const char* what() const throw()
                 {
                     return _message;
@@ -64,7 +66,7 @@ class Foarm
         {
             const char *_message;
             public:
-                FormAlreadySign(void);
+                FormAlreadySign(const char *message);
                 virtual const char* what() const throw()
                 {
                     return _message;
@@ -72,6 +74,6 @@ class Foarm
         };
 };
 
-std::ostream & operator<<(std::ostream & o, Foarm const & rhs);
+std::ostream & operator<<(std::ostream & o, Form const & rhs);
 
 #endif

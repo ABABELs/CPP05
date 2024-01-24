@@ -6,86 +6,96 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 12:57:03 by aabel             #+#    #+#             */
-/*   Updated: 2024/01/23 14:24:28 by aabel            ###   ########.fr       */
+/*   Updated: 2024/01/24 12:07:08 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.Class.hpp"
 
-Foarm::Foarm(std::string const name, int const gradeSign, int const gradeExec) :
+Form::Form(std::string const name, int const gradeSign, int const gradeExec) :
     _name(name), _signed(false), _gradeSign(gradeSign), _gradeExec(gradeExec)
 {
-    if (gradeSign < 1 || gradeExec < 1)
-        throw Foarm::GradeTooHighException();
-    else if (gradeSign > 150 || gradeExec > 150)
-        throw Foarm::GradeTooLowException();
+    return ;
 }
 
-Foarm::Foarm(Foarm const & src) :
+Form::Form(Form const & src) :
     _name(src.getName()), _signed(src.getSigned()), _gradeSign(src.getGradeSign()), _gradeExec(src.getGradeExec())
 {
     *this = src;
 }
 
-Foarm::~Foarm(void) 
+Form::~Form(void) 
 {
     return ;
 }
 
-Foarm & Foarm::operator=(Foarm const & rhs)
+Form & Form::operator=(Form const & rhs)
 {
     if (this != &rhs)
         this->_signed = rhs.getSigned();
     return *this;
 }
 
-std::string const   Foarm::getName(void) const
+std::string const   Form::getName(void) const
 {
     return this->_name;
 }
 
-bool Foarm::getSigned(void) const
+bool Form::getSigned(void) const
 {
     return this->_signed;
 }
 
-int Foarm::getGradeSign(void) const
+int Form::getGradeSign(void) const
 {
 	return this->_gradeSign;
 }
 
-int Foarm::getGradeExec(void) const
+int Form::getGradeExec(void) const
 {
 	return this->_gradeExec;
 }
 
-void Foarm::beSigned(Foarm const & b)
+void Form::beSigned(Bureaucrat &him)
 {
-	if (b.getGradeSign() > this->_gradeSign)
-		throw Foarm::GradeTooLowException();
-	else
-		this->_signed = true;
+	try
+	{
+		if (him.getGrade() > _gradeSign)
+			throw Form::GradeTooLowException("Bureaucrat grade is too low");
+		else if (_signed == 0)
+		{
+			_signed = true;
+			std::cout << him.getName() << " signs " << this->getName() << std::endl;
+		}
+		else
+			throw Form::FormAlreadySign("Form is already sign ");
+	}
+	catch(const Form::GradeTooLowException & e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	catch(const Form::FormAlreadySign& e)
+	{
+		std::cerr << e.what() <<him.getName() << e.what() << this->getName() << std::endl;
+	}
 }
 
-Foarm::GradeTooHighException::GradeTooHighException(void) :
-	_message("Grade is too high")
+Form::GradeTooHighException::GradeTooHighException( const char *message) : _message(message)
 {
 	return ;
 }
 
-Foarm::GradeTooLowException::GradeTooLowException(void) :
-	_message("Grade is too low")
+Form::GradeTooLowException::GradeTooLowException(const char *message) : _message(message)
 {
 	return ;
 }
 
-Foarm::FormAlreadySign::FormAlreadySign(void) :
-	_message("Form is already sign")
+Form::FormAlreadySign::FormAlreadySign(const char *message) : _message(message)
 {
 	return ;
 }
 
-std::ostream & operator<<(std::ostream & o, Foarm const & rhs)
+std::ostream & operator<<(std::ostream & o, Form const & rhs)
 {
 	o << rhs.getName() << " is " << (rhs.getSigned() ? "signed" : "not signed") << std::endl;
 	return o;

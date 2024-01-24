@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: babels <babels@student.42.fr>              +#+  +:+       +#+         #
+#    By: aabel <aabel@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/21 11:26:48 by babels            #+#    #+#              #
-#    Updated: 2024/01/21 12:19:23 by babels           ###   ########.fr        #
+#    Updated: 2024/01/24 11:55:33 by aabel            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = work
-SOURCES = main.cpp Bureaucrat.Class.cpp \
+SOURCES = main.cpp Bureaucrat.Class.cpp Form.Class.cpp \
 
 OBJECTS = $(SOURCES:.cpp=.o)
 

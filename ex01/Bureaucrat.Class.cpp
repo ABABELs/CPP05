@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrate.Class.cpp                              :+:      :+:    :+:   */
+/*   Bureaucrat.Class.cpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:01:04 by babels            #+#    #+#             */
-/*   Updated: 2024/01/21 12:13:59 by babels           ###   ########.fr       */
+/*   Updated: 2024/01/24 11:56:08 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(150)
     {
         std::cerr << e.what() << std::endl;
     }
+}
+
+void    Bureaucrat::signForm(Form &form)
+{
+    form.beSigned(*this);
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat const &src) : _name(src.getName()), _grade(src.getGrade())
