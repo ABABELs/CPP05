@@ -22,6 +22,7 @@ AForm::AForm(AForm const & src) :
     _name(src.getName()), _signed(src.getSigned()), _gradeSign(src.getGradeSign()), _gradeExec(src.getGradeExec())
 {
     *this = src;
+	return ;
 }
 
 AForm::~AForm(void) 
@@ -61,14 +62,13 @@ void AForm::beSigned(Bureaucrat &him)
 	try
 	{
 		if (him.getGrade() > _gradeSign)
-			throw AForm::GradeTooLowException("Bureaucrat grade is too low");
+			throw AForm::GradeTooLowException("Grade of the bureaucrat is to low to sign this form");
 		else if (_signed == 0)
 		{
 			_signed = true;
-			std::cout << him.getName() << " signs " << this->getName() << std::endl;
 		}
 		else
-			throw AForm::AFormAlreadySign("AForm is already sign ");
+			throw AForm::AFormAlreadySign(" attempt to sign a form already signed : ");
 	}
 	catch(const AForm::GradeTooLowException & e)
 	{
@@ -76,7 +76,7 @@ void AForm::beSigned(Bureaucrat &him)
 	}
 	catch(const AForm::AFormAlreadySign& e)
 	{
-		std::cerr << e.what() <<him.getName() << e.what() << this->getName() << std::endl;
+		std::cerr << him.getName() << e.what() << this->getName() << std::endl;
 	}
 }
 

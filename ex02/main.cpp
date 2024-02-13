@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:14:05 by babels            #+#    #+#             */
-/*   Updated: 2024/01/24 14:52:39 by aabel            ###   ########.fr       */
+/*   Updated: 2024/02/13 12:45:53 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,24 @@ int main()
 
 	std::cout << bureau_1 << std::endl;
 	std::cout << bureau_2 << std::endl;
+	std::cout << std::endl;
 
-	form_1->beSigned(bureau_1);
-	form_1->beSigned(bureau_1);
 	bureau_1.signAForm(*form_1);
-	bureau_1.signAForm(*form_1);
+	form_1->beSigned(bureau_1);
 	bureau_1.executeAForm(*form_1);
+	bureau_2.signAForm(*form_1);
+	std::cout << std::endl;
 
-	form_2->beSigned(bureau_1);
-	form_2->execute(bureau_1);
+	bureau_1.signAForm(*form_2);
+	bureau_1.executeAForm(*form_2);
 	bureau_2.signAForm(*form_2);
-	form_2->execute(bureau_2);
+	bureau_1.executeAForm(*form_2);
+	bureau_2.executeAForm(*form_2);
+	std::cout << std::endl;
 
-	bureau_2.signAForm(*form_3);
-	form_3->execute(bureau_2);
+	bureau_1.signAForm(*form_3);
+	form_3->beSigned(bureau_1);
+	bureau_2.executeAForm(*form_3);
 
     return (0);
 }

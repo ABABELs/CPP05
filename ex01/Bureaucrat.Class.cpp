@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:01:04 by babels            #+#    #+#             */
-/*   Updated: 2024/01/24 11:56:08 by aabel            ###   ########.fr       */
+/*   Updated: 2024/02/13 11:27:42 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,15 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(150)
 
 void    Bureaucrat::signForm(Form &form)
 {
-    form.beSigned(*this);
+    try
+    {
+        form.beSigned(*this);
+        std::cout << this->_name << " signed " << form.getName() << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << this->_name << " cannot sign " << form.getName() << " because " << e.what();
+    }
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat const &src) : _name(src.getName()), _grade(src.getGrade())

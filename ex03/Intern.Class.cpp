@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 15:12:00 by aabel             #+#    #+#             */
-/*   Updated: 2024/01/24 15:28:20 by aabel            ###   ########.fr       */
+/*   Updated: 2024/02/13 13:00:45 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ AForm * Intern::makeForm(std::string type, std::string target)
     for (int i = 0; i < 3; i++)
     {
         if (type == arrayStr[i])
+        {
+            std::cout << "Intern creates " << type << std::endl;
             return ((this->*arrayPtr[i])(target));
+        }
     }
     throw Intern::InexistantForm();
 }

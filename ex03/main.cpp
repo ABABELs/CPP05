@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:14:05 by babels            #+#    #+#             */
-/*   Updated: 2024/01/24 15:25:10 by aabel            ###   ########.fr       */
+/*   Updated: 2024/02/13 13:05:21 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ int main()
 	Bureaucrat bureau_1("michel", 45);
 	Bureaucrat bureau_2("Karen", 3);
 	AForm *form_3 = new ShrubberyCreationForm("home");
+	std::cout << bureau_1 << std::endl;
+	std::cout << bureau_2 << std::endl;
+	std::cout << std::endl;
 	try
 	{
 		AForm	*form_2 = someIntern.makeForm("rootomy request", "Sam");
@@ -34,6 +37,7 @@ int main()
 	{
 		std::cerr << e.what() << std::endl;
 	}
+	std::cout << std::endl;
 	try
 	{
 		AForm	*form_4 = someIntern.makeForm("presidential pardon", "Dog");
@@ -44,8 +48,9 @@ int main()
 	{
 		std::cerr << e.what() << std::endl;
 	}
-	std::cout << bureau_1 << std::endl;
-	std::cout << bureau_2 << std::endl;
-	form_3->execute(bureau_2);	
+	std::cout << std::endl;
+	form_3->execute(bureau_2);
+	bureau_1.signAForm(*form_3);
+	bureau_2.executeAForm(*form_3);
 	return (0);
 }
